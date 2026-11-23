@@ -1,0 +1,27 @@
+AegisGuard
+Copyright 2026 Sadhasivam (AegisGuard modifications and new files only; not the Strix code)
+Maintainer: Sadhasivam, https://github.com/Sadha-sivam
+
+This product is a modified version of Strix.
+
+Strix
+Copyright 2025 OmniSecure Inc.
+https://github.com/usestrix/strix
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The original work is redistributed under the Apache License, Version 2.0.
+Modifications made by the AegisGuard maintainer are described in MODIFICATIONS.md.
+The Strix name and logo are not licensed for use by this project (Apache-2.0 Section 6);
+AegisGuard is an independent customization and is not affiliated with or endorsed by the
+Strix project or OmniSecure Inc.
+
+Third-party dependencies are distributed under their own licenses; see uv.lock,
+strix/interface/viewer/frontend/package-lock.json and strix/interface/tui/go.sum.
+
+Additional third-party notices (compiled from lockfile metadata; verify before release):
+- Icons from the VS Code Icons set (codicons, Copyright Microsoft Corporation, CC-BY-4.0) are
+  included in the viewer bundle via the react-icons package. Lucide icons are ISC licensed.
+- The viewer bundle includes React and other MIT/ISC/BSD-licensed JavaScript libraries.
+- The terminal UI links Charmbracelet Bubble Tea, Bubbles and Lip Gloss (MIT) and other Go modules.
+- The sandbox container image (built from containers/Dockerfile) bundles many third-party tools,
+  each under its own license.
