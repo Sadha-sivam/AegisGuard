@@ -1,3 +1,4 @@
+/* AegisGuard notice: branding copy updated from upstream Strix. */
 import { useEffect, useState } from "react";
 import {
   X,
@@ -97,7 +98,7 @@ export function UpgradeModal({
         </button>
 
         <div>
-          <h2 className="text-lg text-white">Available in Strix Cloud</h2>
+          <h2 className="text-lg text-white">Available via upstream Strix Cloud</h2>
           {description && (
             <p className="mt-2 text-base leading-relaxed text-[#e5e5e5]">{description}</p>
           )}
@@ -107,7 +108,7 @@ export function UpgradeModal({
           <div className="rounded-xl border border-[#333] bg-[#0a0a0a] p-4 sm:rounded-lg">
             <div className="mb-3 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-blue-400" />
-              <span className="text-sm font-medium text-white">Strix Cloud also includes</span>
+              <span className="text-sm font-medium text-white">Upstream Strix Cloud also includes</span>
             </div>
             <ul className="space-y-2 text-sm text-[#888]">
               {CLOUD_HIGHLIGHTS.map((f) => (

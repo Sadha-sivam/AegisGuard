@@ -1,4 +1,4 @@
-"""Shell completion scripts and candidates for the Strix CLI."""
+"""Shell completion scripts and candidates for the AegisGuard CLI."""
 
 from __future__ import annotations
 
@@ -33,11 +33,12 @@ def run_completions(argv: list[str]) -> int:
         return 0
     if not argv or argv[0] in ("-h", "--help", "help"):
         sys.stdout.write(
-            "Usage: strix completions <zsh|bash|fish>\n\n"
+            "Usage: aegisguard completions <zsh|bash|fish>\n\n"
             "Enable tab completion for the current shell:\n"
-            "  zsh:  source <(strix completions zsh)\n"
-            "  bash: source <(strix completions bash)\n"
-            "  fish: strix completions fish | source\n"
+            "  zsh:  source <(aegisguard completions zsh)\n"
+            "  bash: source <(aegisguard completions bash)\n"
+            "  fish: aegisguard completions fish | source\n\n"
+            "The legacy `strix` command shares the same completion scripts.\n"
         )
         return 0
     shell = argv[0].lower()
@@ -332,23 +333,24 @@ def _matching(candidates: Any, prefix: str) -> list[str]:
 
 
 def _zsh_script() -> str:
-    return r"""#compdef strix
-_strix() {
+    return r"""#compdef aegisguard strix
+_aegisguard() {
   local -a candidates
   candidates=("${(@f)$($words[1] completions --candidates "${words[@]:2}")}")
-  _describe 'strix' candidates
+  _describe 'aegisguard' candidates
 }
-compdef _strix strix
+compdef _aegisguard aegisguard strix
 """
 
 
 def _bash_script() -> str:
-    return r"""_strix_completion() {
+    return r"""_aegisguard_completion() {
   local -a candidates
   local candidate
+  local cmd="${COMP_WORDS[0]}"
   while IFS= read -r candidate; do
     candidates+=("$candidate")
-  done < <(strix completions --candidates "${COMP_WORDS[@]:1:$COMP_CWORD}")
+  done < <("${cmd}" completions --candidates "${COMP_WORDS[@]:1:$COMP_CWORD}")
   COMPREPLY=("${candidates[@]}")
   for candidate in "${COMPREPLY[@]}"; do
     if [[ $candidate == */ ]]; then
@@ -359,15 +361,18 @@ def _bash_script() -> str:
     fi
   done
 }
-complete -F _strix_completion strix
+complete -F _aegisguard_completion aegisguard
+complete -F _aegisguard_completion strix
 """
 
 
 def _fish_script() -> str:
-    return r"""function __strix_candidates
+    return r"""function __aegisguard_candidates
   set -l words (commandline -opc)
+  set -l cmd $words[1]
   set -e words[1]
-  command strix completions --candidates $words (commandline -ct)
+  command $cmd completions --candidates $words (commandline -ct)
 end
-complete -c strix -f -a '(__strix_candidates)'
+complete -c aegisguard -f -a '(__aegisguard_candidates)'
+complete -c strix -f -a '(__aegisguard_candidates)'
 """

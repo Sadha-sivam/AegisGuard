@@ -188,7 +188,7 @@ export default function Sidebar({
         )}
         style={{ width: collapsed ? 0 : width }}
       >
-        {/* Header — account-switcher stand-in (links out to Strix Cloud). */}
+        {/* Header — account-switcher stand-in (links out to Upstream Strix Cloud). */}
         <header className="relative flex flex-col gap-1 pt-1 min-w-[160px]">
           <div className="flex flex-row py-1 px-2">
             <div className="flex h-10 w-full flex-row items-center">
@@ -198,7 +198,7 @@ export default function Sidebar({
                 rel="noopener noreferrer"
                 onClick={() => trackCta("logo", "sidebar")}
                 className="flex flex-1 flex-row items-center gap-2 rounded-md py-2 pl-2.5 pr-1 min-w-0 transition-colors hover:bg-[rgba(255,255,255,0.06)]"
-                title="Open Strix Cloud"
+                title="Open Upstream Strix Cloud"
               >
                 <span
                   className="flex flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500"
@@ -219,7 +219,7 @@ export default function Sidebar({
                 rel="noopener noreferrer"
                 onClick={() => trackCta("logo", "sidebar")}
                 className="flex flex-none items-center rounded-md px-1.5 py-2 transition-colors hover:bg-[rgba(255,255,255,0.06)]"
-                aria-label="Open Strix Cloud"
+                aria-label="Open Upstream Strix Cloud"
               >
                 <ChevronsUpDown className="h-4 w-4 text-[#666]" />
               </a>

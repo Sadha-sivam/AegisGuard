@@ -1,4 +1,4 @@
-"""Summaries of the runs under ./strix_runs, for pickers and listings."""
+"""Summaries of the runs under ./aegisguard_runs (and legacy ./strix_runs)."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
-from strix.core.paths import run_record_path, runs_base_dir, runtime_state_dir
+from strix.core.paths import existing_runs_dirs, run_record_path, runtime_state_dir
 
 
 if TYPE_CHECKING:
@@ -28,19 +28,21 @@ class RunSummary:
 
 def list_run_summaries(*, cwd: Path | None = None) -> list[RunSummary]:
     """Every run with a run.json, newest activity first (run.json mtime)."""
-    base = runs_base_dir(cwd=cwd)
-    if not base.is_dir():
-        return []
     rows: list[tuple[float, RunSummary]] = []
-    for child in base.iterdir():
-        record_path = run_record_path(child)
-        try:
-            if not record_path.is_file():
+    seen: set[str] = set()
+    for base in existing_runs_dirs(cwd=cwd):
+        for child in base.iterdir():
+            if child.name in seen:
                 continue
-            modified = record_path.stat().st_mtime
-        except OSError:
-            continue
-        rows.append((modified, _summarize(child, _load_json(record_path, default={}))))
+            record_path = run_record_path(child)
+            try:
+                if not record_path.is_file():
+                    continue
+                modified = record_path.stat().st_mtime
+            except OSError:
+                continue
+            seen.add(child.name)
+            rows.append((modified, _summarize(child, _load_json(record_path, default={}))))
     rows.sort(key=lambda row: (row[0], row[1].run_name), reverse=True)
     return [summary for _, summary in rows]
 

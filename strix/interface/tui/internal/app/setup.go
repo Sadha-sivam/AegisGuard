@@ -1,3 +1,4 @@
+// AegisGuard notice (Apache-2.0 section 4(b)): modified from upstream Strix 1.7.1 — TUI branding. See MODIFICATIONS.md.
 package app
 
 import (
@@ -368,21 +369,21 @@ func (m Model) setupHeaderView(fit setupFit) string {
 			rows = append(rows, "")
 		}
 	case logoCompact:
-		rows = append(rows, center.Render(lipgloss.NewStyle().Bold(true).Foreground(brightGreen).Render("STRIX")))
+		rows = append(rows, center.Render(lipgloss.NewStyle().Bold(true).Foreground(brightGreen).Render("AEGISGUARD")))
 	}
 	if fit.tagline {
-		rows = append(rows, center.Render(render.Dim().Render("Open-source AI hackers for your apps")))
+		rows = append(rows, center.Render(render.Dim().Render("AI-Powered Autonomous Security Testing")))
 	}
 	return strings.Join(rows, "\n")
 }
 
-// banner is the Strix wordmark: block letters with a bevelled edge.
-const banner = ` ███████╗████████╗██████╗ ██╗██╗  ██╗
- ██╔════╝╚══██╔══╝██╔══██╗██║╚██╗██╔╝
- ███████╗   ██║   ██████╔╝██║ ╚███╔╝
- ╚════██║   ██║   ██╔══██╗██║ ██╔██╗
- ███████║   ██║   ██║  ██║██║██╔╝ ██╗
- ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝`
+// banner is the AegisGuard wordmark (AEGIS block letters).
+const banner = ` █████╗ ███████╗ ██████╗ ██╗███████╗
+██╔══██╗██╔════╝██╔════╝ ██║██╔════╝
+███████║█████╗  ██║  ███╗██║███████╗
+██╔══██║██╔══╝  ██║   ██║██║╚════██║
+██║  ██║███████╗╚██████╔╝██║███████║
+╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝`
 
 // wordmark renders the banner in solid brand green. Every row is padded out to
 // the full block so centering cannot ripple the letterforms out of alignment.
@@ -446,7 +447,7 @@ func (m Model) setupSummaryView(width int) string {
 		}
 	} else {
 		chips = append(chips, render.Col(amber).Render("○ no model")+
-			render.Dim().Render(" · set STRIX_LLM or configure one in your config"))
+			render.Dim().Render(" · set AEGISGUARD_LLM / STRIX_LLM or configure one in your config"))
 	}
 	if m.snapshot.MaxBudgetUSD != nil {
 		chips = append(chips, render.Dim().Render(fmt.Sprintf("$%.2f budget", *m.snapshot.MaxBudgetUSD)))

@@ -9,9 +9,10 @@ from typing import Any, cast
 from uuid import uuid4
 
 from strix.utils.secret_files import write_secret_text
+from strix.core.brand import config_file
 
 
-IDENTITY_PATH = Path.home() / ".strix" / "cli-identity.json"
+IDENTITY_PATH = config_file("cli-identity.json")
 
 
 def _default_device_name(instance_id: str) -> str:

@@ -94,7 +94,7 @@ def _subscription_error_hint(exc: BaseException) -> str | None:
     if "not supported when using codex with a chatgpt account" in joined:
         return (
             "This model isn't available on your ChatGPT subscription. "
-            "Set STRIX_LLM to a model your plan includes (e.g. chatgpt/gpt-5.4)."
+            "Set AEGISGUARD_LLM or STRIX_LLM to a model your plan includes (e.g. chatgpt/gpt-5.4)."
         )
     if (
         "error code: 401" in joined
@@ -104,7 +104,7 @@ def _subscription_error_hint(exc: BaseException) -> str | None:
     ):
         return (
             "Your ChatGPT sign-in has expired or was revoked. Sign in again:\n"
-            "  strix auth login chatgpt"
+            "  aegisguard auth login chatgpt"
         )
     return None
 
@@ -230,7 +230,7 @@ def display_completion_message(args: argparse.Namespace, results_path: Path) -> 
     view_text.append("\n")
     view_text.append("View", style="dim")
     view_text.append("    ")
-    view_text.append(f"strix view {args.run_name}", style="#22c55e")
+    view_text.append(f"aegisguard view {args.run_name}", style="#22c55e")
     panel_parts.extend(["\n", view_text])
 
     if not scan_completed:
@@ -238,7 +238,7 @@ def display_completion_message(args: argparse.Namespace, results_path: Path) -> 
         resume_text.append("\n")
         resume_text.append("Resume", style="dim")
         resume_text.append("  ")
-        resume_text.append(f"strix --resume {args.run_name}", style="#22c55e")
+        resume_text.append(f"aegisguard --resume {args.run_name}", style="#22c55e")
         panel_parts.extend(["\n", resume_text])
 
     panel_content = Text.assemble(*panel_parts)
@@ -339,7 +339,7 @@ def _print_model_connection_error(exc: BaseException) -> None:
 
 def _print_cli_error(message: str) -> None:
     Console(stderr=True, soft_wrap=True).print(
-        f"strix: error: {message}", markup=False, highlight=False
+        f"aegisguard: error: {message}", markup=False, highlight=False
     )
 
 

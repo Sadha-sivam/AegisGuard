@@ -34,7 +34,8 @@ def is_first_run() -> bool:
     global _FIRST_RUN_CACHED  # noqa: PLW0603
     if _FIRST_RUN_CACHED is not None:
         return _FIRST_RUN_CACHED
-    marker = Path.home() / ".strix" / ".seen"
+    from strix.core.brand import config_file
+    marker = config_file(".seen")
     if marker.exists():
         _FIRST_RUN_CACHED = False
         return False

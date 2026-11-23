@@ -42,8 +42,8 @@ def validate_environment() -> None:
     if codex.subscription_model(settings.llm.model):
         if not codex.is_authenticated():
             console.print(
-                f"[red]STRIX_LLM={settings.llm.model} uses your ChatGPT subscription, "
-                "but you're not signed in.[/] Run [cyan]strix auth login chatgpt[/] first."
+                f"[red]AEGISGUARD_LLM/STRIX_LLM={settings.llm.model} uses your ChatGPT subscription, "
+                "but you're not signed in.[/] Run [cyan]aegisguard auth login chatgpt[/] first."
             )
             report_error("subscription_not_signed_in")
             sys.exit(1)
@@ -51,7 +51,7 @@ def validate_environment() -> None:
         return
 
     if not settings.llm.model:
-        missing_required_vars.append("STRIX_LLM")
+        missing_required_vars.append("AEGISGUARD_LLM/STRIX_LLM")
 
     if not settings.llm.api_key:
         missing_optional_vars.append("LLM_API_KEY")
@@ -78,9 +78,9 @@ def validate_environment() -> None:
 
         error_text.append("\nRequired environment variables:\n", style="white")
         for var in missing_required_vars:
-            if var == "STRIX_LLM":
+            if var == "AEGISGUARD_LLM/STRIX_LLM":
                 error_text.append("• ", style="white")
-                error_text.append("STRIX_LLM", style="bold cyan")
+                error_text.append("AEGISGUARD_LLM/STRIX_LLM", style="bold cyan")
                 error_text.append(
                     " - Model name to use (e.g., 'openrouter/z-ai/glm-5.3' or "
                     "'anthropic/claude-opus-4-7')\n",
@@ -111,9 +111,9 @@ def validate_environment() -> None:
                         " - API key for Exa web search (enables real-time research)\n",
                         style="white",
                     )
-                elif var == "STRIX_REASONING_EFFORT":
+                elif var in {"STRIX_REASONING_EFFORT", "AEGISGUARD_REASONING_EFFORT"}:
                     error_text.append("• ", style="white")
-                    error_text.append("STRIX_REASONING_EFFORT", style="bold cyan")
+                    error_text.append("AEGISGUARD_REASONING_EFFORT / STRIX_REASONING_EFFORT", style="bold cyan")
                     error_text.append(
                         " - Reasoning effort level: none, minimal, low, medium, high, xhigh, "
                         "max (default: high)\n",
@@ -121,7 +121,10 @@ def validate_environment() -> None:
                     )
 
         error_text.append("\nExample setup:\n", style="white")
-        error_text.append("export STRIX_LLM='openrouter/z-ai/glm-5.3'\n", style="dim white")
+        error_text.append(
+            "export AEGISGUARD_LLM='openrouter/z-ai/glm-5.3'  # or STRIX_LLM\n",
+            style="dim white",
+        )
 
         if missing_optional_vars:
             for var in missing_optional_vars:
@@ -137,7 +140,7 @@ def validate_environment() -> None:
                     )
                 elif var == "EXA_API_KEY":
                     error_text.append("export EXA_API_KEY='your-exa-key-here'\n", style="dim white")
-                elif var == "STRIX_REASONING_EFFORT":
+                elif var in {"STRIX_REASONING_EFFORT", "AEGISGUARD_REASONING_EFFORT"}:
                     error_text.append(
                         "export STRIX_REASONING_EFFORT='high'\n",
                         style="dim white",
@@ -145,7 +148,7 @@ def validate_environment() -> None:
 
         panel = Panel(
             error_text,
-            title="[bold white]STRIX",
+            title="[bold white]AEGISGUARD",
             title_align="left",
             border_style="red",
             padding=(1, 2),
@@ -177,7 +180,7 @@ def check_docker_installed() -> None:
 
         panel = Panel(
             error_text,
-            title="[bold white]STRIX",
+            title="[bold white]AEGISGUARD",
             title_align="left",
             border_style="red",
             padding=(1, 2),
@@ -225,7 +228,7 @@ def pull_docker_image() -> None:
 
             panel = Panel(
                 error_text,
-                title="[bold white]STRIX",
+                title="[bold white]AEGISGUARD",
                 title_align="left",
                 border_style="red",
                 padding=(1, 2),

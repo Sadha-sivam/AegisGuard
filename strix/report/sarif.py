@@ -1,3 +1,4 @@
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1. Changes: tool name/URI branding. See MODIFICATIONS.md.
 """SARIF 2.1.0 output for Strix vulnerability reports.
 
 Builds a GitHub code-scanning compatible SARIF document from Strix findings
@@ -62,8 +63,8 @@ logger = logging.getLogger(__name__)
 
 SARIF_SCHEMA = "https://json.schemastore.org/sarif-2.1.0.json"
 SARIF_VERSION = "2.1.0"
-TOOL_NAME = "Strix"
-TOOL_INFORMATION_URI = "https://strix.ai"
+TOOL_NAME = "AegisGuard"
+TOOL_INFORMATION_URI = "https://github.com/Sadha-sivam/AegisGuard"
 
 # Synthetic anchor for findings that have no safe code location. SARIF
 # requires every result to carry at least one location, and GitHub

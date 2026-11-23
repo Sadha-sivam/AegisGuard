@@ -4,7 +4,7 @@ The local viewer proxies email verification and encrypted-report delivery to
 the Strix relay (``STRIX_APP_URL``). The browser never talks to the relay
 directly, and the report password generated locally is never sent to it.
 
-State lives in ``~/.strix/viewer-auth.json`` (0600). ``is_verified`` is a local
+State lives in ``~/.aegisguard/viewer-auth.json`` (or legacy ``~/.strix/``) (0600). ``is_verified`` is a local
 flag that unlocks browsing the run history list; the relay still enforces token
 expiry when a report is actually sent.
 """
@@ -23,11 +23,12 @@ import requests
 
 from strix.config.loader import load_settings
 from strix.utils.secret_files import write_secret_text
+from strix.core.brand import config_file
 
 
 logger = logging.getLogger(__name__)
 
-AUTH_PATH = Path.home() / ".strix" / "viewer-auth.json"
+AUTH_PATH = config_file("viewer-auth.json")
 
 _OTP_TIMEOUT = 15
 _SEND_TIMEOUT = 30

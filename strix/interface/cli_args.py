@@ -1,5 +1,5 @@
 # AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text only. See MODIFICATIONS.md.
-"""Command-line argument parsing for the ``strix`` scan entrypoint."""
+"""Command-line argument parsing for the ``aegisguard`` (and legacy ``strix``) entrypoint."""
 
 from __future__ import annotations
 
@@ -66,54 +66,54 @@ def parse_arguments() -> argparse.Namespace:
         epilog="""
 Examples:
   # Web application penetration test
-  strix --target https://example.com
+  aegisguard --target https://example.com
 
   # GitHub repository analysis
-  strix --target https://github.com/user/repo
-  strix --target git@github.com:user/repo.git
+  aegisguard --target https://github.com/user/repo
+  aegisguard --target git@github.com:user/repo.git
 
   # Local code analysis
-  strix --target ./my-project
+  aegisguard --target ./my-project
 
   # API spec test (OpenAPI/Swagger file or Postman collection export)
-  strix --target ./openapi.yaml --target https://api.example.com
-  strix --target ./collection.postman_collection.json
+  aegisguard --target ./openapi.yaml --target https://api.example.com
+  aegisguard --target ./collection.postman_collection.json
 
   # Postman collection pulled live by id (needs POSTMAN_API_KEY); optional environment
-  strix --target postman://<collection-uuid> --target https://api.example.com
-  strix --target "postman://<collection-uuid>?env=<environment-uuid>"
+  aegisguard --target postman://<collection-uuid> --target https://api.example.com
+  aegisguard --target "postman://<collection-uuid>?env=<environment-uuid>"
 
   # Domain penetration test
-  strix --target example.com
+  aegisguard --target example.com
 
   # IP address penetration test
-  strix --target 192.168.1.42
+  aegisguard --target 192.168.1.42
 
   # Multiple targets (e.g., white-box testing with source and deployed app)
-  strix --target https://github.com/user/repo --target https://example.com
-  strix --target ./my-project --target https://staging.example.com --target https://prod.example.com
+  aegisguard --target https://github.com/user/repo --target https://example.com
+  aegisguard --target ./my-project --target https://staging.example.com --target https://prod.example.com
 
   # Targets from a file, one target per non-empty, non-comment line
-  strix --target-list ./targets.txt
+  aegisguard --target-list ./targets.txt
 
   # Custom instructions (inline)
-  strix --target example.com --instruction "Focus on authentication vulnerabilities"
+  aegisguard --target example.com --instruction "Focus on authentication vulnerabilities"
 
   # Custom instructions (from file)
-  strix --target example.com --instruction-file ./instructions.txt
-  strix --target https://app.com --instruction-file /path/to/detailed_instructions.md
+  aegisguard --target example.com --instruction-file ./instructions.txt
+  aegisguard --target https://app.com --instruction-file /path/to/detailed_instructions.md
 
   # Extra files placed in the sandbox workspace
-  strix --target ./my-project --workspace-file ./wordlist.txt
-  strix --target https://app.com --workspace-file ./openapi.yaml:specs/openapi.yaml
+  aegisguard --target ./my-project --workspace-file ./wordlist.txt
+  aegisguard --target https://app.com --workspace-file ./openapi.yaml:specs/openapi.yaml
 
-Strix Cloud:
-  strix cloud login
-  strix cloud scans start --source . --yes --wait
-  strix cloud                      # list every cloud resource
+Upstream Strix Cloud (optional; not an AegisGuard-hosted service):
+  aegisguard cloud login
+  aegisguard cloud scans start --source . --yes --wait
+  aegisguard cloud                 # list every cloud resource
 
-  Run a pentest in Strix Cloud     https://app.strix.ai
-  Try Strix Enterprise             https://strix.ai/demo
+  Strix Cloud                      https://app.strix.ai
+  Strix Enterprise demo            https://strix.ai/demo
         """,
     )
 
@@ -121,13 +121,13 @@ Strix Cloud:
         "-v",
         "--version",
         action="version",
-        version=f"strix {get_version()}",
+        version=f"aegisguard {get_version()} (Strix-compatible)",
     )
 
     parser.add_argument(
         "--update",
         action="store_true",
-        help="Update strix to the latest version and exit. Self-updates the "
+        help="Update AegisGuard to the latest version and exit. Self-updates the "
         "standalone binary install; for pip/pipx/uv installs, prints the "
         "matching upgrade command instead.",
     )
@@ -268,14 +268,14 @@ Strix Cloud:
     parser.add_argument(
         "--config",
         type=str,
-        help="Path to a custom config file (JSON) to use instead of ~/.strix/cli-config.json",
+        help="Path to a custom config file (JSON) to use instead of ~/.aegisguard/cli-config.json",
     )
 
     parser.add_argument(
         "--mcp-config",
         type=str,
         metavar="PATH",
-        help="Path to an MCP servers JSON file to use instead of ~/.strix/mcp-servers.json.",
+        help="Path to an MCP servers JSON file to use instead of ~/.aegisguard/mcp-servers.json.",
     )
 
     parser.add_argument(
@@ -328,7 +328,7 @@ Strix Cloud:
         const="",
         metavar="RUN_NAME",
         help=(
-            "Resume a prior scan by its run name (the dir under ./strix_runs/). "
+            "Resume a prior scan by its run name (the dir under ./aegisguard_runs/). "
             "Picks up the root + every non-terminal subagent's full LLM history "
             "and agent topology. Skips fresh run-name generation. Without a "
             "name, opens a picker of the prior runs."

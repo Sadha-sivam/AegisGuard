@@ -2,7 +2,7 @@
 [project]
 name = "strix-agent"
 version = "1.7.1"
-description = "AegisGuard: multi-agent AI penetration testing CLI (a customized build of the open-source Strix project)"
+description = "AegisGuard — AI-Powered Autonomous Security Testing Platform (derived from open-source Strix)"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.12"
@@ -65,8 +65,10 @@ Repository = "https://github.com/Sadha-sivam/AegisGuard"
 "Upstream project (Strix)" = "https://github.com/usestrix/strix"
 
 [project.scripts]
-strix = "strix.interface.main:main"
+# Primary product command. The Python package/distribution names remain
+# ``strix`` / ``strix-agent`` for upstream compatibility (imports, metadata).
 aegisguard = "strix.interface.main:main"
+strix = "strix.interface.main:main"
 
 [dependency-groups]
 dev = [

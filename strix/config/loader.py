@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Any, Union, get_args, get_origin
 from pydantic import AliasChoices, BaseModel
 
 from strix.config.settings import LlmSettings, Settings
+from strix.core.brand import config_file
 from strix.utils.secret_files import write_secret_text
 
 
@@ -24,7 +25,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-_DEFAULT_PATH: Path = Path.home() / ".strix" / "cli-config.json"
+_DEFAULT_PATH: Path = config_file("cli-config.json")
 _override: Path | None = None
 _cached: Settings | None = None
 

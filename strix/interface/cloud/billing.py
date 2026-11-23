@@ -553,7 +553,8 @@ def _npx_prefix(npx: str, wallet_root: Path) -> list[str]:
 
 def _wallet_npm_cache() -> Path:
     """Keep one private npm cache so the pinned wallet client installs once."""
-    cache = Path.home() / ".strix" / "wallet-npm-cache"
+    from strix.core.brand import ensure_config_dir
+    cache = ensure_config_dir() / "wallet-npm-cache"
     cache.mkdir(mode=0o700, parents=True, exist_ok=True)
     return cache
 

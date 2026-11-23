@@ -208,7 +208,7 @@ def _resumable_record(skills: list[str]) -> dict[str, Any]:
 def test_resume_restores_persisted_skills(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     _stub_settings(monkeypatch)
     monkeypatch.chdir(tmp_path)
-    _write_resumable_run(tmp_path / "strix_runs", "pentest_abcd", _resumable_record(["idor"]))
+    _write_resumable_run(tmp_path / "aegisguard_runs", "pentest_abcd", _resumable_record(["idor"]))
     monkeypatch.setattr(sys, "argv", ["strix", "--resume", "pentest_abcd"])
 
     assert cli_main.parse_arguments().skills == ["idor"]
@@ -217,7 +217,7 @@ def test_resume_restores_persisted_skills(tmp_path: Path, monkeypatch: pytest.Mo
 def test_resume_explicit_skills_flag_wins(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     _stub_settings(monkeypatch)
     monkeypatch.chdir(tmp_path)
-    _write_resumable_run(tmp_path / "strix_runs", "pentest_abcd", _resumable_record(["idor"]))
+    _write_resumable_run(tmp_path / "aegisguard_runs", "pentest_abcd", _resumable_record(["idor"]))
     monkeypatch.setattr(
         sys, "argv", ["strix", "--resume", "pentest_abcd", "--skills", "business_logic"]
     )

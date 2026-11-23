@@ -77,7 +77,7 @@ func TestFocusedPanelsCarryTheGreenBorder(t *testing.T) {
 		m.width, m.height = 130, 30
 		m.showSplash = false
 		m.snapshot.ScanState = "running"
-		m.snapshot.Agents = []protocol.Agent{{ID: "a0", Name: "Strix", Status: "running"}}
+		m.snapshot.Agents = []protocol.Agent{{ID: "a0", Name: "AegisGuard", Status: "running"}}
 		m.snapshot.Vulnerabilities = []map[string]any{{"title": "XSS", "severity": "high"}}
 		m.focus = focus
 		m.resizeViewport()

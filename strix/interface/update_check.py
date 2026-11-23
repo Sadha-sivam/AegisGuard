@@ -2,7 +2,7 @@
 
 Follows the pattern used by tools like gh, uv, and pip: a background,
 rate-limited (once per 24h) check against the release source, a cached
-result in ``~/.strix``, a non-intrusive notice with the upgrade command
+result in ``~/.aegisguard`` (or legacy ``~/.strix``), a non-intrusive notice with the upgrade command
 for the detected install method, and a ``strix --update`` self-update
 path for the standalone binary install.
 """
@@ -31,6 +31,7 @@ from rich.console import Console
 from rich.prompt import Prompt
 
 from strix.telemetry._common import get_version
+from strix.core.brand import config_file
 
 
 logger = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ PYPI_PACKAGE = "strix-agent"
 CHECK_INTERVAL_SECONDS = 24 * 60 * 60
 REQUEST_TIMEOUT_SECONDS = 5
 
-_CACHE_PATH = Path.home() / ".strix" / "update-check.json"
+_CACHE_PATH = config_file("update-check.json")
 
 _background_thread: threading.Thread | None = None
 

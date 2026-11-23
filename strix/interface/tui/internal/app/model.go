@@ -183,7 +183,7 @@ const (
 // the column is too narrow to show the full one without clipping it.
 const (
 	setupPlaceholder      = "Describe what to test, or name a target"
-	setupPlaceholderShort = "What should Strix test?"
+	setupPlaceholderShort = "What should AegisGuard test?"
 	chatPlaceholder       = "Send a message"
 )
 

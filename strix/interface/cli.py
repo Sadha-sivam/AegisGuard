@@ -1,3 +1,4 @@
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text. See MODIFICATIONS.md.
 import atexit
 import contextlib
 import logging
@@ -33,7 +34,7 @@ def _resolve_sandbox_image() -> str:
     image = load_settings().runtime.image
     if not image:
         raise RuntimeError(
-            "strix_image is not configured. Set it in ~/.strix/cli-config.json.",
+            "sandbox image is not configured. Set STRIX_IMAGE or AEGISGUARD_IMAGE in ~/.aegisguard/cli-config.json.",
         )
     return image
 
@@ -58,7 +59,7 @@ async def run_cli(args: Any) -> None:  # noqa: PLR0915
     results_text = Text()
     results_text.append("Output", style="dim")
     results_text.append("  ")
-    results_text.append(f"strix_runs/{args.run_name}", style="#60a5fa")
+    results_text.append(f"aegisguard_runs/{args.run_name}", style="#60a5fa")
 
     note_text = Text()
     note_text.append("\n\n", style="dim")
@@ -73,7 +74,7 @@ async def run_cli(args: Any) -> None:  # noqa: PLR0915
             results_text,
             note_text,
         ),
-        title="[bold white]STRIX",
+        title="[bold white]AEGISGUARD",
         title_align="left",
         border_style="#22c55e",
         padding=(1, 2),
@@ -182,7 +183,7 @@ async def run_cli(args: Any) -> None:  # noqa: PLR0915
 
         return Panel(
             status_text,
-            title="[bold white]STRIX",
+            title="[bold white]AEGISGUARD",
             title_align="left",
             border_style="#22c55e",
             padding=(1, 2),
@@ -250,7 +251,7 @@ async def run_cli(args: Any) -> None:  # noqa: PLR0915
                 "\n\n",
                 report_state.final_scan_result,
             ),
-            title="[bold white]STRIX",
+            title="[bold white]AEGISGUARD",
             title_align="left",
             border_style="#60a5fa",
             padding=(1, 2),

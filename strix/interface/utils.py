@@ -1,3 +1,4 @@
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text. See MODIFICATIONS.md.
 import ipaddress
 import json
 import logging
@@ -979,7 +980,7 @@ def _resolve_repo_diff_scope(
 
     if _is_repo_shallow(repo_path):
         raise ValueError(
-            "Strix requires full git history for diff-scope. Please set fetch-depth: 0 "
+            "AegisGuard requires full git history for diff-scope. Please set fetch-depth: 0 "
             "in your CI config."
         )
 
@@ -1619,7 +1620,7 @@ def check_docker_connection() -> Any:
 
         panel = Panel(
             error_text,
-            title="[bold white]STRIX",
+            title="[bold white]AEGISGUARD",
             title_align="left",
             border_style="red",
             padding=(1, 2),

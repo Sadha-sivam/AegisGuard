@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING, Any
 import requests
 
 from strix.utils.secret_files import write_secret_text
+from strix.core.brand import config_file
 
 
 if TYPE_CHECKING:
@@ -57,7 +58,7 @@ _EXPIRY_SKEW_S = 300
 _refresh_lock = threading.Lock()
 
 # Kept separate from cli-config.json so OAuth tokens never land in the env-var config.
-AUTH_PATH = Path.home() / ".strix" / "subscription-auth.json"
+AUTH_PATH = config_file("subscription-auth.json")
 
 
 def _read_store() -> dict[str, Any]:

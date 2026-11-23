@@ -1,3 +1,4 @@
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1. Changes: OpenRouter attribution headers. See MODIFICATIONS.md.
 """SDK model configuration helpers."""
 
 from __future__ import annotations
@@ -885,8 +886,8 @@ def _openrouter_error_type(error: object) -> object:
 
 
 APP_ATTRIBUTION_HEADERS = {
-    "HTTP-Referer": "https://strix.ai",
-    "X-Title": "Strix",
+    "HTTP-Referer": "https://github.com/Sadha-sivam/AegisGuard",
+    "X-Title": "AegisGuard",
 }
 
 OPENROUTER_ATTRIBUTION_HEADERS = {

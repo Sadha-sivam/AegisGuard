@@ -1,4 +1,5 @@
-"""Strix application settings — pydantic-settings powered."""
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: AEGISGUARD_* environment-variable aliases. See MODIFICATIONS.md.
+"""AegisGuard application settings (Strix-compatible) — pydantic-settings powered."""
 
 from __future__ import annotations
 
@@ -29,10 +30,10 @@ _BASE_CONFIG = SettingsConfigDict(
 class LlmSettings(BaseSettings):
     model_config = _BASE_CONFIG
 
-    model: str | None = Field(default=None, alias="STRIX_LLM")
+    model: str | None = Field(default=None, validation_alias=AliasChoices("AEGISGUARD_LLM", "STRIX_LLM"))
     api_type: ApiType | None = Field(
         default=None,
-        validation_alias=AliasChoices("STRIX_API_TYPE", "STRIX_FORCE_API"),
+        validation_alias=AliasChoices("AEGISGUARD_API_TYPE", "STRIX_API_TYPE", "AEGISGUARD_FORCE_API", "STRIX_FORCE_API"),
         description="Force 'responses' or 'chat_completions' API path",
     )
     api_key: str | None = Field(
@@ -42,13 +43,7 @@ class LlmSettings(BaseSettings):
     )
     api_base: str | None = Field(
         default=None,
-        validation_alias=AliasChoices(
-            "LLM_API_BASE",
-            "OPENAI_API_BASE",
-            "OPENAI_BASE_URL",
-            "LITELLM_BASE_URL",
-            "OLLAMA_API_BASE",
-        ),
+        validation_alias=AliasChoices("LLM_API_BASE", "OPENAI_API_BASE", "OPENAI_BASE_URL", "LITELLM_BASE_URL", "OLLAMA_API_BASE"),
     )
     extra_headers: dict[str, str] | None = Field(
         default=None,
@@ -60,35 +55,35 @@ class LlmSettings(BaseSettings):
         alias="LLM_EXTRA_BODY",
         repr=False,
     )
-    reasoning_effort: ReasoningEffort = Field(default="high", alias="STRIX_REASONING_EFFORT")
+    reasoning_effort: ReasoningEffort = Field(default="high", validation_alias=AliasChoices("AEGISGUARD_REASONING_EFFORT", "STRIX_REASONING_EFFORT"))
     input_cost_per_mtok: float | None = Field(
-        default=None, ge=0, allow_inf_nan=False, alias="STRIX_LLM_INPUT_COST_PER_MTOK"
+        default=None, ge=0, allow_inf_nan=False, validation_alias=AliasChoices("AEGISGUARD_LLM_INPUT_COST_PER_MTOK", "STRIX_LLM_INPUT_COST_PER_MTOK")
     )
     output_cost_per_mtok: float | None = Field(
-        default=None, ge=0, allow_inf_nan=False, alias="STRIX_LLM_OUTPUT_COST_PER_MTOK"
+        default=None, ge=0, allow_inf_nan=False, validation_alias=AliasChoices("AEGISGUARD_LLM_OUTPUT_COST_PER_MTOK", "STRIX_LLM_OUTPUT_COST_PER_MTOK")
     )
     cached_input_cost_per_mtok: float | None = Field(
-        default=None, ge=0, allow_inf_nan=False, alias="STRIX_LLM_CACHED_INPUT_COST_PER_MTOK"
+        default=None, ge=0, allow_inf_nan=False, validation_alias=AliasChoices("AEGISGUARD_LLM_CACHED_INPUT_COST_PER_MTOK", "STRIX_LLM_CACHED_INPUT_COST_PER_MTOK")
     )
     force_required_tool_choice: bool = Field(
         default=False,
-        alias="STRIX_FORCE_REQUIRED_TOOL_CHOICE",
+        validation_alias=AliasChoices("AEGISGUARD_FORCE_REQUIRED_TOOL_CHOICE", "STRIX_FORCE_REQUIRED_TOOL_CHOICE"),
     )
     parallel_tool_calls: bool = Field(
         default=False,
-        alias="STRIX_PARALLEL_TOOL_CALLS",
+        validation_alias=AliasChoices("AEGISGUARD_PARALLEL_TOOL_CALLS", "STRIX_PARALLEL_TOOL_CALLS"),
     )
     prompt_cache: bool = Field(
         default=True,
-        alias="STRIX_PROMPT_CACHE",
+        validation_alias=AliasChoices("AEGISGUARD_PROMPT_CACHE", "STRIX_PROMPT_CACHE"),
     )
     # Providers cache prompts in fixed-size token blocks, so a fully cached prompt
     # can read back up to a block short. 128 covers the largest common size
     # (OpenAI; DeepSeek and GLM use 64, vLLM defaults to 16).
-    cache_block_tokens: int = Field(default=128, ge=1, alias="STRIX_CACHE_BLOCK_TOKENS")
+    cache_block_tokens: int = Field(default=128, ge=1, validation_alias=AliasChoices("AEGISGUARD_CACHE_BLOCK_TOKENS", "STRIX_CACHE_BLOCK_TOKENS"))
     openrouter_sticky_sessions: bool = Field(
         default=False,
-        alias="STRIX_OPENROUTER_STICKY_SESSIONS",
+        validation_alias=AliasChoices("AEGISGUARD_OPENROUTER_STICKY_SESSIONS", "STRIX_OPENROUTER_STICKY_SESSIONS"),
     )
     disable_streaming: bool = Field(
         default=False,
@@ -116,10 +111,10 @@ class LlmSettings(BaseSettings):
 class DedupeSettings(BaseSettings):
     model_config = _BASE_CONFIG
 
-    model: str | None = Field(default=None, alias="STRIX_DEDUPE_MODEL")
+    model: str | None = Field(default=None, validation_alias=AliasChoices("AEGISGUARD_DEDUPE_MODEL", "STRIX_DEDUPE_MODEL"))
     reasoning_effort: ReasoningEffort | None = Field(
         default=None,
-        alias="STRIX_DEDUPE_REASONING_EFFORT",
+        validation_alias=AliasChoices("AEGISGUARD_DEDUPE_REASONING_EFFORT", "STRIX_DEDUPE_REASONING_EFFORT"),
     )
     api_key: str | None = Field(default=None, alias="DEDUPE_LLM_API_KEY", repr=False)
     api_base: str | None = Field(default=None, alias="DEDUPE_LLM_API_BASE")
@@ -145,18 +140,18 @@ class ContextSettings(BaseSettings):
 
     model_config = _BASE_CONFIG
 
-    auto_compact: bool = Field(default=True, alias="STRIX_CONTEXT_AUTO_COMPACT")
-    compact_buffer_tokens: int = Field(default=20_000, gt=0, alias="STRIX_CONTEXT_BUFFER_TOKENS")
-    keep_tokens: int = Field(default=8_000, gt=0, alias="STRIX_CONTEXT_KEEP_TOKENS")
+    auto_compact: bool = Field(default=True, validation_alias=AliasChoices("AEGISGUARD_CONTEXT_AUTO_COMPACT", "STRIX_CONTEXT_AUTO_COMPACT"))
+    compact_buffer_tokens: int = Field(default=20_000, gt=0, validation_alias=AliasChoices("AEGISGUARD_CONTEXT_BUFFER_TOKENS", "STRIX_CONTEXT_BUFFER_TOKENS"))
+    keep_tokens: int = Field(default=8_000, gt=0, validation_alias=AliasChoices("AEGISGUARD_CONTEXT_KEEP_TOKENS", "STRIX_CONTEXT_KEEP_TOKENS"))
     fallback_context_tokens: int = Field(
-        default=200_000, gt=0, alias="STRIX_CONTEXT_FALLBACK_TOKENS"
+        default=200_000, gt=0, validation_alias=AliasChoices("AEGISGUARD_CONTEXT_FALLBACK_TOKENS", "STRIX_CONTEXT_FALLBACK_TOKENS")
     )
-    summary_max_tokens: int = Field(default=4_096, gt=0, alias="STRIX_CONTEXT_SUMMARY_TOKENS")
-    tool_output_max_tokens: int = Field(default=8_000, gt=0, alias="STRIX_TOOL_OUTPUT_MAX_TOKENS")
-    tool_output_max_lines: int = Field(default=2_000, gt=0, alias="STRIX_TOOL_OUTPUT_MAX_LINES")
+    summary_max_tokens: int = Field(default=4_096, gt=0, validation_alias=AliasChoices("AEGISGUARD_CONTEXT_SUMMARY_TOKENS", "STRIX_CONTEXT_SUMMARY_TOKENS"))
+    tool_output_max_tokens: int = Field(default=8_000, gt=0, validation_alias=AliasChoices("AEGISGUARD_TOOL_OUTPUT_MAX_TOKENS", "STRIX_TOOL_OUTPUT_MAX_TOKENS"))
+    tool_output_max_lines: int = Field(default=2_000, gt=0, validation_alias=AliasChoices("AEGISGUARD_TOOL_OUTPUT_MAX_LINES", "STRIX_TOOL_OUTPUT_MAX_LINES"))
     # Floor above the truncation-notice size so a preview always fits.
     tool_output_max_bytes: int = Field(
-        default=50 * 1024, ge=1024, alias="STRIX_TOOL_OUTPUT_MAX_BYTES"
+        default=50 * 1024, ge=1024, validation_alias=AliasChoices("AEGISGUARD_TOOL_OUTPUT_MAX_BYTES", "STRIX_TOOL_OUTPUT_MAX_BYTES")
     )
 
 
@@ -165,18 +160,18 @@ class RuntimeSettings(BaseSettings):
 
     image: str = Field(
         default="ghcr.io/usestrix/strix-sandbox:1.4.1",
-        alias="STRIX_IMAGE",
+        validation_alias=AliasChoices("AEGISGUARD_IMAGE", "STRIX_IMAGE"),
     )
-    backend: str = Field(default="docker", alias="STRIX_RUNTIME_BACKEND")
+    backend: str = Field(default="docker", validation_alias=AliasChoices("AEGISGUARD_RUNTIME_BACKEND", "STRIX_RUNTIME_BACKEND"))
     # Max screenshot/image tool outputs kept live per agent context (0 = none).
-    max_context_images: int = Field(default=3, ge=0, alias="STRIX_MAX_CONTEXT_IMAGES")
+    max_context_images: int = Field(default=3, ge=0, validation_alias=AliasChoices("AEGISGUARD_MAX_CONTEXT_IMAGES", "STRIX_MAX_CONTEXT_IMAGES"))
 
 
 class TelemetrySettings(BaseSettings):
     model_config = _BASE_CONFIG
 
-    enabled: bool = Field(default=True, alias="STRIX_TELEMETRY")
-    run_record_timings: bool = Field(default=False, alias="STRIX_RUN_RECORD_TIMINGS")
+    enabled: bool = Field(default=True, validation_alias=AliasChoices("AEGISGUARD_TELEMETRY", "STRIX_TELEMETRY"))
+    run_record_timings: bool = Field(default=False, validation_alias=AliasChoices("AEGISGUARD_RUN_RECORD_TIMINGS", "STRIX_RUN_RECORD_TIMINGS"))
 
 
 WebSearchProvider = Literal["auto", "perplexity", "exa"]
@@ -198,17 +193,17 @@ class IntegrationSettings(BaseSettings):
     )
     web_search_provider: WebSearchProvider = Field(
         default="auto",
-        alias="STRIX_WEB_SEARCH_PROVIDER",
+        validation_alias=AliasChoices("AEGISGUARD_WEB_SEARCH_PROVIDER", "STRIX_WEB_SEARCH_PROVIDER"),
     )
     exa_search_type: ExaSearchType = Field(
         default="auto",
-        alias="STRIX_EXA_SEARCH_TYPE",
+        validation_alias=AliasChoices("AEGISGUARD_EXA_SEARCH_TYPE", "STRIX_EXA_SEARCH_TYPE"),
     )
     exa_num_results: int = Field(
         default=5,
         ge=1,
         le=100,
-        alias="STRIX_EXA_NUM_RESULTS",
+        validation_alias=AliasChoices("AEGISGUARD_EXA_NUM_RESULTS", "STRIX_EXA_NUM_RESULTS"),
     )
     postman_api_key: str | None = Field(
         default=None,
@@ -220,10 +215,10 @@ class IntegrationSettings(BaseSettings):
 class ViewerSettings(BaseSettings):
     model_config = _BASE_CONFIG
 
-    # Base URL of the Strix relay the local viewer proxies to for email
+    # Base URL of the upstream Strix Cloud relay the local viewer proxies to for email
     # verification and encrypted report delivery. The browser never talks to
     # the relay directly; the local server is the only caller.
-    app_url: str = Field(default="https://app.strix.ai", alias="STRIX_APP_URL")
+    app_url: str = Field(default="https://app.strix.ai", validation_alias=AliasChoices("AEGISGUARD_APP_URL", "STRIX_APP_URL"))
 
 
 class Settings(BaseSettings):

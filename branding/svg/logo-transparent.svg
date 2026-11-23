@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AegisGuard">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#g)" d="M128 16c32 16 64 20 96 24v88c0 58-38 98-96 120C70 226 32 186 32 128V40c32-4 64-8 96-24z"/>
+  <path fill="#0b1220" fill-opacity="0.35" d="M128 48c22 11 44 14 66 17v58c0 40-26 68-66 84-40-16-66-44-66-84V65c22-3 44-6 66-17z"/>
+  <path fill="#ecfdf5" d="M98 168 L128 72 L158 168 H138 L128 128 L118 168 Z"/>
+  <rect x="112" y="148" width="32" height="14" rx="2" fill="#ecfdf5"/>
+</svg>
