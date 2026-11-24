@@ -1,4 +1,5 @@
-# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1. Changes: OpenRouter attribution headers. See MODIFICATIONS.md.
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1.
+# Changes: OpenRouter attribution headers. See MODIFICATIONS.md.
 """SDK model configuration helpers."""
 
 from __future__ import annotations
@@ -116,7 +117,8 @@ class _CodexResponsesModel(OpenAIResponsesModel):
         if len(args) >= 3:  # model_settings is positional arg 2
             args = (*args[:2], self._codex_settings(args[2]), *args[3:])
         try:
-            events = await super()._fetch_response(*args, stream=True, **kwargs)  # type: ignore[call-overload]
+            # type: ignore[call-overload]
+            events = await super()._fetch_response(*args, stream=True, **kwargs)
         except Exception as exc:
             guardrail = self._as_guardrail(exc)
             if guardrail is not None:
@@ -918,7 +920,8 @@ def _configure_attribution(model_name: str | None) -> None:
     current: object = litellm.headers
     existing: dict[str, str] = current if isinstance(current, dict) else {}
     remaining = {k: v for k, v in existing.items() if k not in OPENROUTER_ATTRIBUTION_HEADERS}
-    litellm.headers = {**remaining, **attribution_headers(model_name)} or None  # type: ignore[assignment]
+    # type: ignore[assignment]
+    litellm.headers = {**remaining, **attribution_headers(model_name)} or None
 
 
 def _configure_extra_headers(llm: LlmSettings) -> None:

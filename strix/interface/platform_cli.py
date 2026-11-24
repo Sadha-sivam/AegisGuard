@@ -2,7 +2,8 @@
 
 Signing in runs an OAuth 2.0 device authorization flow in the browser, creates
 the Strix account and workspace when they do not exist yet, and stores a
-personal API token in ``~/.aegisguard/platform-auth.json`` (or legacy ``~/.strix/``). The token drives the
+personal API token in ``~/.aegisguard/platform-auth.json`` (or legacy ``~/.strix/``). The token
+drives the
 managed REST API (scans, credits, top-ups) without a dashboard visit.
 """
 
@@ -14,7 +15,6 @@ import json
 import sys
 import time
 import webbrowser
-from pathlib import Path
 from typing import Any, NoReturn, cast
 from urllib.parse import urlparse, urlsplit, urlunsplit
 
@@ -25,11 +25,11 @@ from rich.panel import Panel
 from rich.text import Text
 
 from strix.config import load_settings
+from strix.core.brand import config_file
 from strix.interface.platform_identity import read_or_create_identity
 from strix.interface.terminal_text import sanitize_terminal_text
 from strix.interface.url_safety import is_safe_web_url
 from strix.utils.secret_files import write_secret_text
-from strix.core.brand import config_file
 
 
 AUTH_PATH = config_file("platform-auth.json")

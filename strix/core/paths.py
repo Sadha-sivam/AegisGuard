@@ -10,6 +10,7 @@ from strix.core.brand import (
     runs_search_dir_names,
 )
 
+
 # Public name used by CLI help / docs. New runs write under this name by default
 # (or AEGISGUARD_RUNS_DIR / STRIX_RUNS_DIR). Legacy ``strix_runs`` remains
 # discoverable for resume/view.
@@ -55,9 +56,7 @@ def existing_runs_dirs(*, cwd: Path | None = None) -> list[Path]:
 def latest_run_dir(*, cwd: Path | None = None) -> Path | None:
     candidates: list[Path] = []
     for root in existing_runs_dirs(cwd=cwd):
-        candidates.extend(
-            child for child in root.iterdir() if run_record_path(child).is_file()
-        )
+        candidates.extend(child for child in root.iterdir() if run_record_path(child).is_file())
     if not candidates:
         # Fall back to empty preferred dir existence check for callers that mkdir later
         return None

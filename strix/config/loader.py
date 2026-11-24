@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import logging
 import os
-from pathlib import Path
 from types import UnionType
 from typing import TYPE_CHECKING, Any, Union, get_args, get_origin
 
@@ -18,6 +17,7 @@ from strix.utils.secret_files import write_secret_text
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
+    from pathlib import Path
 
     from pydantic.fields import FieldInfo
 

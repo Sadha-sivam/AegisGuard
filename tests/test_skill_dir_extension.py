@@ -67,7 +67,9 @@ def test_registered_dir_adds_new_skill(tmp_path: Path) -> None:
     register_skill_dir(tmp_path)
 
     assert "widget" in get_all_skill_names()
-    assert get_available_skills()["extra"] == [{"name": "widget", "description": ""}]
+    assert get_available_skills()["extra"] == [
+        {"name": "widget", "description": "", "priority": False}
+    ]
     assert load_skills(["widget"]) == {"widget": "widget body"}
 
 
@@ -92,7 +94,7 @@ def test_available_skill_includes_frontmatter_description(tmp_path: Path) -> Non
     register_skill_dir(tmp_path)
 
     assert get_available_skills()["extra"] == [
-        {"name": "widget", "description": "Useful widget guidance"}
+        {"name": "widget", "description": "Useful widget guidance", "priority": False}
     ]
 
 
@@ -106,7 +108,7 @@ def test_available_skill_supports_colon_in_description(tmp_path: Path) -> None:
     register_skill_dir(tmp_path)
 
     assert get_available_skills()["extra"] == [
-        {"name": "widget", "description": "Useful widget: handles YAML"}
+        {"name": "widget", "description": "Useful widget: handles YAML", "priority": False}
     ]
 
 
@@ -120,7 +122,7 @@ def test_available_skill_normalizes_quoted_description(tmp_path: Path) -> None:
     register_skill_dir(tmp_path)
 
     assert get_available_skills()["extra"] == [
-        {"name": "widget", "description": "Useful: widget guidance"}
+        {"name": "widget", "description": "Useful: widget guidance", "priority": False}
     ]
 
 
@@ -158,7 +160,7 @@ def test_available_skill_supports_block_scalar_trailing_comment(tmp_path: Path) 
     register_skill_dir(tmp_path)
 
     assert get_available_skills()["extra"] == [
-        {"name": "commented", "description": "First line Second line"}
+        {"name": "commented", "description": "First line Second line", "priority": False}
     ]
 
 
@@ -171,7 +173,9 @@ def test_malformed_frontmatter_keeps_skill_body(tmp_path: Path) -> None:
     )
     register_skill_dir(tmp_path)
 
-    assert get_available_skills()["extra"] == [{"name": "broken", "description": ""}]
+    assert get_available_skills()["extra"] == [
+        {"name": "broken", "description": "", "priority": False}
+    ]
     assert load_skills(["extra/broken"]) == {"broken": "broken body"}
 
 
@@ -196,7 +200,9 @@ def test_registered_root_skill_is_discoverable_and_valid(tmp_path: Path) -> None
     register_skill_dir(tmp_path)
 
     assert "widget" in get_all_skill_names()
-    assert get_available_skills()["root"] == [{"name": "widget", "description": ""}]
+    assert get_available_skills()["root"] == [
+        {"name": "widget", "description": "", "priority": False}
+    ]
     assert validate_requested_skills(["widget"]) is None
     assert validate_requested_skills(["root/widget"]) is None
     assert load_skills(["widget"]) == {"widget": "widget body"}
@@ -209,8 +215,12 @@ def test_ambiguous_bare_skill_requires_qualified_name(tmp_path: Path) -> None:
     register_skill_dir(tmp_path)
 
     assert "widget" in get_all_skill_names()
-    assert get_available_skills()["alpha"] == [{"name": "widget", "description": ""}]
-    assert get_available_skills()["beta"] == [{"name": "widget", "description": ""}]
+    assert get_available_skills()["alpha"] == [
+        {"name": "widget", "description": "", "priority": False}
+    ]
+    assert get_available_skills()["beta"] == [
+        {"name": "widget", "description": "", "priority": False}
+    ]
     assert validate_requested_skills(["alpha/widget"]) is None
     assert validate_requested_skills(["beta/widget"]) is None
 

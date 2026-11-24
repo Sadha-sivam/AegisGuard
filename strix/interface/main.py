@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text only. See MODIFICATIONS.md.
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1
+# (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text only.
+# See MODIFICATIONS.md.
 """
 AegisGuard Agent Interface (Strix-based)
 """

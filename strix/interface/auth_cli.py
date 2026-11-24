@@ -1,4 +1,6 @@
-# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text only. See MODIFICATIONS.md.
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1
+# (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text only.
+# See MODIFICATIONS.md.
 """`strix auth` — ChatGPT subscription sign-in (login / status / logout).
 
 Signing in only stores OAuth tokens (``~/.strix/subscription-auth.json``); model
@@ -406,7 +408,8 @@ _CALLBACK_HTML = """<!doctype html>
     <p class="tagline">Autonomous AI hackers that <b>find and fix</b> your app's
       vulnerabilities.</p>
     <nav class="links">
-      <a href="https://github.com/Sadha-sivam/AegisGuard" target="_blank" rel="noopener">AegisGuard</a>
+      <a href="https://github.com/Sadha-sivam/AegisGuard"
+         target="_blank" rel="noopener">AegisGuard</a>
       <span class="dot">·</span>
       <a href="https://github.com/usestrix/strix" target="_blank" rel="noopener">based on Strix</a>
     </nav>

@@ -2,7 +2,8 @@
 
 Follows the pattern used by tools like gh, uv, and pip: a background,
 rate-limited (once per 24h) check against the release source, a cached
-result in ``~/.aegisguard`` (or legacy ``~/.strix``), a non-intrusive notice with the upgrade command
+result in ``~/.aegisguard`` (or legacy ``~/.strix``), a non-intrusive notice with the upgrade
+command
 for the detected install method, and a ``strix --update`` self-update
 path for the standalone binary install.
 """
@@ -30,8 +31,8 @@ import requests
 from rich.console import Console
 from rich.prompt import Prompt
 
-from strix.telemetry._common import get_version
 from strix.core.brand import config_file
+from strix.telemetry._common import get_version
 
 
 logger = logging.getLogger(__name__)

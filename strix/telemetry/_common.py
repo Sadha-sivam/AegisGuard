@@ -4,7 +4,6 @@ import logging
 import platform
 import sys
 from importlib.metadata import PackageNotFoundError, version
-from pathlib import Path
 from typing import Any, cast
 from uuid import uuid4
 
@@ -34,7 +33,8 @@ def is_first_run() -> bool:
     global _FIRST_RUN_CACHED  # noqa: PLW0603
     if _FIRST_RUN_CACHED is not None:
         return _FIRST_RUN_CACHED
-    from strix.core.brand import config_file
+    from strix.core.brand import config_file  # noqa: PLC0415
+
     marker = config_file(".seen")
     if marker.exists():
         _FIRST_RUN_CACHED = False

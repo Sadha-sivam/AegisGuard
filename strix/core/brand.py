@@ -10,6 +10,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+
 PRODUCT_NAME = "AegisGuard"
 PRODUCT_NAME_UPPER = "AEGISGUARD"
 PRODUCT_TAGLINE = "AI-Powered Autonomous Security Testing Platform"

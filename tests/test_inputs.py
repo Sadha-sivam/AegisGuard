@@ -482,7 +482,10 @@ def test_openrouter_attribution_rides_on_the_request_headers() -> None:
 
 def test_vercel_ai_gateway_attribution_rides_on_the_request_headers() -> None:
     headers = make_model_settings(None, model_name="vercel_ai_gateway/zai/glm-5.3").extra_headers
-    assert headers == {"HTTP-Referer": "https://github.com/Sadha-sivam/AegisGuard", "X-Title": "AegisGuard"}
+    assert headers == {
+        "HTTP-Referer": "https://github.com/Sadha-sivam/AegisGuard",
+        "X-Title": "AegisGuard",
+    }
 
 
 def test_openrouter_attribution_absent_for_other_providers() -> None:

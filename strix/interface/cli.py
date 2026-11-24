@@ -1,4 +1,6 @@
-# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1 (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text. See MODIFICATIONS.md.
+# AegisGuard notice (Apache-2.0 section 4(b)): this file was modified from upstream Strix 1.7.1
+# (https://github.com/usestrix/strix, Copyright 2025 OmniSecure Inc.). Changes: branding text. See
+# MODIFICATIONS.md.
 import atexit
 import contextlib
 import logging
@@ -34,7 +36,8 @@ def _resolve_sandbox_image() -> str:
     image = load_settings().runtime.image
     if not image:
         raise RuntimeError(
-            "sandbox image is not configured. Set STRIX_IMAGE or AEGISGUARD_IMAGE in ~/.aegisguard/cli-config.json.",
+            "sandbox image is not configured. Set STRIX_IMAGE or AEGISGUARD_IMAGE "
+            "in ~/.aegisguard/cli-config.json.",
         )
     return image
 

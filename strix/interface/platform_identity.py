@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import json
 import platform
-from pathlib import Path
 from typing import Any, cast
 from uuid import uuid4
 
-from strix.utils.secret_files import write_secret_text
 from strix.core.brand import config_file
+from strix.utils.secret_files import write_secret_text
 
 
 IDENTITY_PATH = config_file("cli-identity.json")

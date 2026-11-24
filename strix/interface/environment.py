@@ -42,7 +42,8 @@ def validate_environment() -> None:
     if codex.subscription_model(settings.llm.model):
         if not codex.is_authenticated():
             console.print(
-                f"[red]AEGISGUARD_LLM/STRIX_LLM={settings.llm.model} uses your ChatGPT subscription, "
+                f"[red]AEGISGUARD_LLM/STRIX_LLM={settings.llm.model} "
+                "uses your ChatGPT subscription, "
                 "but you're not signed in.[/] Run [cyan]aegisguard auth login chatgpt[/] first."
             )
             report_error("subscription_not_signed_in")
@@ -113,7 +114,9 @@ def validate_environment() -> None:
                     )
                 elif var in {"STRIX_REASONING_EFFORT", "AEGISGUARD_REASONING_EFFORT"}:
                     error_text.append("• ", style="white")
-                    error_text.append("AEGISGUARD_REASONING_EFFORT / STRIX_REASONING_EFFORT", style="bold cyan")
+                    error_text.append(
+                        "AEGISGUARD_REASONING_EFFORT / STRIX_REASONING_EFFORT", style="bold cyan"
+                    )
                     error_text.append(
                         " - Reasoning effort level: none, minimal, low, medium, high, xhigh, "
                         "max (default: high)\n",

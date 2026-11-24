@@ -19,13 +19,12 @@ import secrets
 import threading
 import time
 import urllib.parse
-from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import requests
 
-from strix.utils.secret_files import write_secret_text
 from strix.core.brand import config_file
+from strix.utils.secret_files import write_secret_text
 
 
 if TYPE_CHECKING:
