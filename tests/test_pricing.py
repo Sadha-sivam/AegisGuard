@@ -53,9 +53,7 @@ def test_resolves_common_bare_model_names() -> None:
     # The resolver must not guess when the bare model name is ambiguous.
     assert resolve_litellm_model("grok-4.5") is None
     assert resolve_litellm_model("xai/grok-4.5") == "xai/grok-4.5"
-    assert resolve_litellm_model("perplexity/xai/grok-4.5") == (
-        "perplexity/xai/grok-4.5"
-    )
+    assert resolve_litellm_model("perplexity/xai/grok-4.5") == ("perplexity/xai/grok-4.5")
     # MiniMax-M3 is sold by several LiteLLM providers at different prices, so
     # the resolver must not guess from its bare name. A provider-qualified
     # model remains deterministic.
