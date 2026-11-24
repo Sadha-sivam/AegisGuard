@@ -117,8 +117,8 @@ class _CodexResponsesModel(OpenAIResponsesModel):
         if len(args) >= 3:  # model_settings is positional arg 2
             args = (*args[:2], self._codex_settings(args[2]), *args[3:])
         try:
-            # type: ignore[call-overload]
-            events = await super()._fetch_response(*args, stream=True, **kwargs)
+            fetch_response = cast("Any", super()._fetch_response)
+            events = await fetch_response(*args, stream=True, **kwargs)
         except Exception as exc:
             guardrail = self._as_guardrail(exc)
             if guardrail is not None:
@@ -920,8 +920,7 @@ def _configure_attribution(model_name: str | None) -> None:
     current: object = litellm.headers
     existing: dict[str, str] = current if isinstance(current, dict) else {}
     remaining = {k: v for k, v in existing.items() if k not in OPENROUTER_ATTRIBUTION_HEADERS}
-    # type: ignore[assignment]
-    litellm.headers = {**remaining, **attribution_headers(model_name)} or None
+    setattr(litellm, "headers", {**remaining, **attribution_headers(model_name)} or None)  # noqa: B010
 
 
 def _configure_extra_headers(llm: LlmSettings) -> None:
